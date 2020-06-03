@@ -1,9 +1,15 @@
 # Autoresponder
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/probot/autoresponder.svg)](https://greenkeeper.io/)
+This is a fork of
+[probot/autoresponder](https://github.com/probot/autoresponder) that's been
+updated to the latest dependencies (as of June 2020) and enhanced in two ways:
 
-This is a GitHub Integration built with [probot](https://github.com/probot/probot) that automatically replies to opened GitHub issues with the contents of `.github/ISSUE_REPLY_TEMPLATE.md`.
+1. In addition to `.github/ISSUE_REPLY_TEMPLATE.md` for responding to new
+   issues, `.github/PULL_REQUEST_REPLY_TEMPLATE.md` will be used for responding
+   to new pull requests (if you install this probot, you'll need to further
+   subscribe to pull request events)
 
-![](https://cloud.githubusercontent.com/assets/173/23834371/788d330e-0723-11e7-9e71-81d77c01267d.png)
+2. If your template contains `@@NUMBER@@`, it will be substituted for the number
+   of the new issue or pull request
 
 See [docs/deploy.md](docs/deploy.md) if you would like to run your own instance of this plugin.
