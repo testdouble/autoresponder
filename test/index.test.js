@@ -8,7 +8,7 @@ describe('autoresponder', () => {
   let app
 
   beforeEach(() => {
-    robot = createProbot({githubToken: 'test'})
+    robot = createProbot({ githubToken: 'test' })
 
     // Load the plugin
     app = robot.load(plugin)
@@ -19,7 +19,7 @@ describe('autoresponder', () => {
         // Response for getting content from '.github/ISSUE_REPLY_TEMPLATE.md'
         getContents: jest.fn().mockImplementation(() => Promise.resolve({
           data: {
-            content: Buffer.from(`Hello World!`).toString('base64')
+            content: Buffer.from('Hello World!').toString('base64')
           }
         }))
       },
