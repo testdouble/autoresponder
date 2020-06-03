@@ -33,7 +33,7 @@ describe('autoresponder', () => {
     app.auth = () => Promise.resolve(github)
   })
 
-  test('posts a comment', async () => {
+  test('posts a comment to an issue', async () => {
     await robot.receive(event)
 
     expect(github.repos.getContents).toHaveBeenCalledWith({
