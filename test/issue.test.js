@@ -2,11 +2,8 @@ const { createProbot } = require('probot')
 const plugin = require('..')
 const event = require('./fixtures/issues.opened')
 
+let robot, github, app, fakeTemplate
 describe('autoresponder', () => {
-  let robot
-  let github
-  let app
-
   beforeEach(() => {
     robot = createProbot({ githubToken: 'test' })
 
@@ -19,7 +16,7 @@ describe('autoresponder', () => {
         // Response for getting content from '.github/ISSUE_REPLY_TEMPLATE.md'
         getContents: jest.fn().mockImplementation(() => Promise.resolve({
           data: {
-            content: Buffer.from('Hello World!').toString('base64')
+            content: Buffer.from(fakeTemplate).toString('base64')
           }
         }))
       },
@@ -34,6 +31,8 @@ describe('autoresponder', () => {
   })
 
   test('posts a comment to an issue', async () => {
+    fakeTemplate = 'Hello greetings and welcome to issue #@@NUMBER@@'
+
     await robot.receive(event)
 
     expect(github.repos.getContents).toHaveBeenCalledWith({
@@ -46,7 +45,7 @@ describe('autoresponder', () => {
       owner: 'robotland',
       repo: 'test',
       number: 97,
-      body: 'Hello World!'
+      body: 'Hello greetings and welcome to issue #97'
     })
   })
 })
