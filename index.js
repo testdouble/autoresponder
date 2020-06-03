@@ -6,10 +6,11 @@ class AutoResponder {
 
   async respond (context) {
     const options = context.repo({ path: this.templatePath() })
-    const res = await context.github.repos.getContents(options)
-    const template = Buffer.from(res.data.content, 'base64').toString().replace(/@@NUMBER@@/g, context.payload.number)
-
-    return context.github.issues.createComment(context.issue({ body: template }))
+    try {
+      const res = await context.github.repos.getContents(options)
+      const template = Buffer.from(res.data.content, 'base64').toString().replace(/@@NUMBER@@/g, context.payload.number)
+      return context.github.issues.createComment(context.issue({ body: template }))
+    } catch {}
   }
 
   templatePath () {

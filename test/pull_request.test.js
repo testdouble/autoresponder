@@ -13,7 +13,6 @@ describe('autoresponder', () => {
     // Mock out the GitHub API
     github = {
       repos: {
-        // Response for getting content from '.github/ISSUE_REPLY_TEMPLATE.md'
         getContents: jest.fn().mockImplementation(() => Promise.resolve({
           data: {
             content: Buffer.from(fakeTemplate).toString('base64')
